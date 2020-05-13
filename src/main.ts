@@ -5,9 +5,11 @@ import router from './router'
 import store from './store'
 import Icons from '@/components/icons.vue';
 import './assets/style/media.scss'
+import VueResource from 'vue-resource'
 
 
 Vue.config.productionTip = false
+Vue.use(VueResource)
 
 Vue.component('Icons',Icons)
 
