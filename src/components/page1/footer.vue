@@ -1,27 +1,59 @@
 <template>
-  <footer>
+  <footer ref="footer" id="footer">
     <div class="layOut">
-      <Icons class="icon leftIcon" name="left" />
-      <div class="coverBox">
-        <Images />
+      <Icons class="icon leftIcon" name="left"
+       />
+      <div class="coverBox" ref="box">
+        <Images :style="{marginLeft:leftWidth+'px'}" id="ul" class="box-img"/>
+        <!-- <Images :style="{marginLeft:leftWidth+'px',marginRight:rightWidth+'px'}" ref="ul"/> -->
       </div>
-      <Icons class="icon rightIcon" name="right" @click="scrollLeft" />
+      <Icons class="icon rightIcon" name="right" 
+      @click="scrollLeft" />
     </div>
   </footer>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component} from "vue-property-decorator";
 import Axios from "axios";
 import Images from "@/components/footer/images.vue";
 @Component({
   components: { Images }
 })
 export default class Footer extends Vue {
+  leftWidth:number=0
+  rightWidth:number=0
   scrollLeft() {
+
+   
+    this.$nextTick(() => {
+      
+      let ele = document.getElementById('ul');
     
+
+      //  return;
+      // let cliWidth=this.$refs.footer.offsetHeight/0.24*0.22;
+      let cliWidth=(this.$refs.footer as any).offsetHeight/0.24*0.22;
+      let coverWidth = this.$refs.box.offsetWidth;
+      let liCount=Math.floor(coverWidth/cliWidth)
+      let scrollWidth=cliWidth*liCount
+      console.log("coverWidth");
+      console.log(coverWidth);
+      this.leftWidth+=-scrollWidth
+    });
   }
+  // scrollRight() {
+  //   this.$nextTick(() => {
+  //     let cliWidth=this.$refs.footer.offsetHeight/0.24*0.22;
+  //     let coverWidth = this.$refs.box.offsetWidth;
+  //     let liCount=Math.floor(coverWidth/cliWidth)
+  //     let scrollWidth=cliWidth*liCount
+  //     console.log("coverWidth");
+  //     console.log(coverWidth);
+  //     this.rightWidth+=scrollWidth
+  //   });
+  // }
 }
 </script>
 
@@ -44,9 +76,19 @@ footer {
     align-items: center;
     justify-content: center;
     > .coverBox {
-      flex: 1;
+      // flex: 1;
       overflow: hidden;
+      position: relative;
       border: 1px solid red;
+      height: 100%;
+      width: 100%;
+
+      > .box-img {
+        position: absolute;
+        left: 0;
+        top:0;
+
+      }
     }
 
     > .icon {
