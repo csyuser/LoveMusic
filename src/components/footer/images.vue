@@ -30,7 +30,6 @@ export default class Images extends Vue {
     { name: "伤感", url: "sadness" },
     { name: "经典电影", url: "movie" },
     { name: "爱情电影", url: "loveMovie" },
-    { name: "送给对象的情歌", url: "forYou" },
     { name: "超好听的翻唱", url: "Cover" },
     { name: "咖啡厅背景音乐", url: "bgm" },
     { name: "民谣", url: "folkRhyme" }
@@ -45,6 +44,7 @@ export default class Images extends Vue {
 <style lang="scss" scoped>
 ul {
   display: flex;
+  transition: all 0.4s;
   > li {
     width: 20vh;
     height: 20vh;

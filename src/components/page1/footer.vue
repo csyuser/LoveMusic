@@ -78,7 +78,6 @@ footer {
       // flex: 1;
       overflow: hidden;
       position: relative;
-      border: 1px solid red;
       height: 100%;
       width: 100%;
 
