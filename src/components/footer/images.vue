@@ -2,7 +2,6 @@
   <ul>
     <li v-for="item in channels" :key="item.name" ref="li">
       <div class="bgmImg" :style="{backgroundImage: 'url('+parseImg(item.url) +')'}"></div>
-      <!-- <img :src="require('../../assets/images/'+item.url+'.jpg')" alt="picture"/> -->
       <h3>{{item.name}}</h3>
     </li>
   </ul>
@@ -30,11 +29,11 @@ export default class Images extends Vue {
     { name: "动漫", url: "Anime" },
     { name: "伤感", url: "sadness" },
     { name: "经典电影", url: "movie" },
-    { name: "爱情电影", url: "Love movie" },
-    { name: "送给对象的情歌", url: "for you" },
+    { name: "爱情电影", url: "loveMovie" },
+    { name: "送给对象的情歌", url: "forYou" },
     { name: "超好听的翻唱", url: "Cover" },
     { name: "咖啡厅背景音乐", url: "bgm" },
-    { name: "民谣", url: "folk rhyme" }
+    { name: "民谣", url: "folkRhyme" }
   ];
 
   public parseImg(path: string) {
@@ -52,7 +51,6 @@ ul {
     text-align: center;
     cursor: pointer;
     margin: 2vh 2vh 0 0;
-    //   flex: 1;
     > .bgmImg {
       width: 20vh;
       height: 16vh;
@@ -63,16 +61,6 @@ ul {
         box-shadow: 0 0 0.25vh 0.25vh rgba(255, 255, 255, 0.3);
       }
     }
-    // > img {
-    //   width: 20vh;
-    //   height: 16vh;
-    //   transition: all 0.4s;
-    //   background-size: cover;
-    //   background-position: center center;
-    //   &:hover {
-    //     box-shadow: 0 0 0.25vh 0.25vh rgba(255, 255, 255, 0.3);
-    //   }
-    // }
     > h3 {
       color: rgba(255, 255, 255, 0.8);
       margin-top: 1vh;
