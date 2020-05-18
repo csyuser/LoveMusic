@@ -30,17 +30,26 @@ export default class Page1 extends Vue {
     const tag = document.getElementById("tag");
     const title = document.getElementById("title");
     const author = document.getElementById("author");
-        const lyric = document.getElementById("lyric");
+    const lyric = document.getElementById("lyric");
 
-
-    if (themeImg === null || bg === null || tag === null || title === null || author===null ||lyric===null)
+    if (
+      themeImg === null ||
+      bg === null ||
+      tag === null ||
+      title === null ||
+      author === null ||
+      lyric === null 
+    )
       return;
     themeImg.style.backgroundImage = "url(" + this.parseImg(item.imgUrl) + ")";
     bg.style.backgroundImage = "url(" + this.parseImg(item.imgUrl) + ")";
     tag.innerHTML = item.name;
     title.innerHTML = item.song[0].title;
     author.innerHTML = item.song[0].artist;
-    lyric.innerHTML = item.song[0].lyric;
+    const audio = new Audio();
+    audio.src = require("../assets/music/" + item.song[0].url + ".mp3");
+    audio.play();
+    console.log(audio.src);
   }
 }
 </script>

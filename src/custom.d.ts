@@ -1,4 +1,11 @@
 type Picture = {
-    name:string
-    url:string
+    id: number
+    name: string
+    imgUrl: string
+    song: Song[]
+}
+type Song = {
+    title: string
+    artist: string
+    url: string
 }

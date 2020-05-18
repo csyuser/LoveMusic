@@ -14,12 +14,6 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import localData from "@/constants/localData"
 
-type Picture = {
-  id:number
-  name: string;
-  imgUrl: string;
-  song:{}[]
-};
 
 @Component
 export default class Images extends Vue {
