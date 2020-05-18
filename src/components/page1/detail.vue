@@ -1,7 +1,7 @@
 <template>
   <div class="details">
-    <span class="tag">90后</span>
-    <h1 class="title">Love</h1>
+    <span class="tag" id="tag">90后</span>
+    <h1 class="title" id="title">Love</h1>
     <ul class="icons">
       <li>
         <icons name="earphone" class="item"/>
@@ -22,8 +22,8 @@
       </div>
       <div class="currentTime">1:05</div>
     </div>
-    <div class="author">作者作者</div>
-    <div class="lyric">歌词歌词歌词歌词歌词歌词歌词歌词</div>
+    <div class="author" id="author">作者作者</div>
+    <div id="lyric">歌词歌词歌词歌词歌词歌词歌词歌词</div>
   </div>
 </template>
 
@@ -33,7 +33,6 @@
 
   @Component
   export default class Detail extends Vue {
-
   }
 </script>
 

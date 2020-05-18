@@ -1,7 +1,9 @@
 <template>
   <ul>
-    <li v-for="item in channels" :key="item.name" ref="li">
-      <div class="bgmImg" :style="{backgroundImage: 'url('+parseImg(item.url) +')'}"></div>
+    <li v-for="item in channels" :key="item.name" ref="li"
+    @click="$emit('click',item)"
+    >
+      <div class="bgmImg" :style="{backgroundImage: 'url('+parseImg(item.imgUrl) +')'}"></div>
       <h3>{{item.name}}</h3>
     </li>
   </ul>
@@ -10,34 +12,22 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import localData from "@/constants/localData"
 
 type Picture = {
+  id:number
   name: string;
-  url: string;
+  imgUrl: string;
+  song:{}[]
 };
 
 @Component
 export default class Images extends Vue {
-  channels: Picture[] = [
-    { name: "经典", url: "classics" },
-    { name: "校园", url: "class" },
-    { name: "小清新", url: "pure" },
-    { name: "旅游", url: "travel" },
-    { name: "粤语", url: "Cantonese" },
-    { name: "林俊杰", url: "JJ" },
-    { name: "英文歌", url: "English" },
-    { name: "动漫", url: "Anime" },
-    { name: "伤感", url: "sadness" },
-    { name: "经典电影", url: "movie" },
-    { name: "爱情电影", url: "loveMovie" },
-    { name: "超好听的翻唱", url: "Cover" },
-    { name: "咖啡厅背景音乐", url: "bgm" },
-    { name: "民谣", url: "folkRhyme" }
-  ];
-
+  channels:Picture[]=localData
   public parseImg(path: string) {
     return require("../../assets/images/" + path + ".jpg");
   }
+  
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div class="layOut">
       <Icons class="icon leftIcon" name="left" @click="scroll('left')" />
       <div class="coverBox" ref="box">
-        <Images :style="{marginLeft:leftWidth+'px'}" id="ul" class="box-img" />
+        <Images :style="{marginLeft:leftWidth+'px'}" id="ul" class="box-img" @click="getSong" />
         <!-- <Images :style="{marginLeft:leftWidth+'px',marginRight:rightWidth+'px'}" ref="ul"/> -->
       </div>
       <Icons class="icon rightIcon" name="right" @click="scroll('right')" />
@@ -52,6 +52,9 @@ export default class Footer extends Vue {
         }
       }
     });
+  }
+  getSong(item:Picture) {
+    this.$emit("song", item);
   }
 }
 </script>

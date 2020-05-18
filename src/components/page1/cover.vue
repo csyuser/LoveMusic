@@ -1,6 +1,6 @@
 <template>
   <div class="cover">
-    <figure></figure>
+    <figure id="themeImg"></figure>
     <div class="icons">
       <icons name="last" class="item"/>
       <icons name="pause" class="item"/>
