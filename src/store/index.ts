@@ -32,7 +32,7 @@ const store = new Vuex.Store({
       tag.innerHTML = payload.item.name;
       title.innerHTML = payload.item.song[payload.number].title;
       author.innerHTML = payload.item.song[payload.number].artist;
-      state.audio.src = require("../assets/music/" + payload.item.song[state.number].url + ".mp3");
+      state.audio.src = require("../assets/music/" + payload.item.song[payload.number].url + ".mp3");
       state.audio.play();
       // console.log('songImgUrl')
       // console.log(songImgUrl)
@@ -49,7 +49,7 @@ const store = new Vuex.Store({
     },
     updateNext(state, item) {
       state.number+=1
-      store.commit('updateCover', item)
+      store.commit('updateCover', {item:item,number:state.number})
       console.log(state.number)
     }
     // updatePlay(state) {
