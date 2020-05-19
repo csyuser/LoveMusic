@@ -8,4 +8,5 @@ type Song = {
     title: string
     artist: string
     url: string
+    imgUrl: string
 }
