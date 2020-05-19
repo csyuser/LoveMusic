@@ -37,16 +37,18 @@ export default class Page1 extends Vue {
     this.btnPlayName = "pause";
   }
   updateNext() {
+    this.btnPlayName = "pause";
     if (this.item.song.length-1 > this.number) {
       this.number += 1;
       this.$store.commit("updateNext", {item: this.item,number: this.number });
       console.log(this.number);
       console.log(this.item.song.length);
     }else{
-      window.alert('最后一首啦')
+      window.alert('这是最后一首啦')
     }
   }
   updateLast() {
+    this.btnPlayName = "pause";
     if(this.number>0){
     this.number -= 1;
     this.$store.commit("updateNext", { item: this.item, number: this.number });
