@@ -5,8 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    audio: new Audio(),
-    number: 0
+    audio: new Audio()
   },
   mutations: {
     // parseImg(state,path: string) {
@@ -47,10 +46,8 @@ const store = new Vuex.Store({
         state.audio.pause()
       }
     },
-    updateNext(state, item) {
-      state.number+=1
-      store.commit('updateCover', {item:item,number:state.number})
-      console.log(state.number)
+    updateNext(state, payload:{item:Picture,number:number}) {
+      store.commit('updateCover', {item:payload.item,number:payload.number})
     }
     // updatePlay(state) {
     //   if (state.btnPlay === 'pause') {

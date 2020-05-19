@@ -2,7 +2,7 @@
   <div class="cover">
     <figure id="themeImg"></figure>
     <div class="icons">
-      <icons name="last" class="item" />
+      <icons name="last" class="item" @click="$emit('updateLast',$event)"/>
       <icons :name="btnPlay" class="item" id="btnPlay" @click="$emit('updatePlay',$event)" />
       <icons name="next" class="item" @click="$emit('updateNext',$event)" />
       <icons name="heart" class="item" />

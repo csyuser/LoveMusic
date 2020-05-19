@@ -2,7 +2,12 @@
   <section class="page-music">
     <Background id="bg" />
     <main class="layOut">
-      <Cover @updateNext="updateNext" @updatePlay="updatePlay" :btnPlay='btnPlayName' />
+      <Cover
+        @updateNext="updateNext"
+        @updatePlay="updatePlay"
+        @updateLast="updateLast"
+        :btnPlay="btnPlayName"
+      />
       <Detail />
     </main>
     <Footer @song="updateCover" />
@@ -21,25 +26,44 @@ import Footer from "@/components/page1/footer.vue";
   components: { Footer, Detail, Cover, Background }
 })
 export default class Page1 extends Vue {
-item:Picture={id: 0,name: '',imgUrl: '',song: []}
-btnPlayName: string='play'
+  item: Picture = { id: 0, name: "", imgUrl: "", song: [] };
+  btnPlayName: string = "play";
+  number: number = 0;
 
-  updateCover(item: Picture,number:number) {
-    this.$store.commit("updateCover", {item:item,number:0});
-    this.item = item
-    this.btnPlayName = 'pause'
+  updateCover(item: Picture) {
+    this.number = 0;
+    this.$store.commit("updateCover", { item: item, number: this.number });
+    this.item = item;
+    this.btnPlayName = "pause";
   }
-  updateNext(){
-    this.$store.commit("updateNext", this.item)
+  updateNext() {
+    if (this.item.song.length-1 > this.number) {
+      this.number += 1;
+      this.$store.commit("updateNext", {item: this.item,number: this.number });
+      console.log(this.number);
+      console.log(this.item.song.length);
+    }else{
+      window.alert('最后一首啦')
+    }
+  }
+  updateLast() {
+    if(this.number>0){
+    this.number -= 1;
+    this.$store.commit("updateNext", { item: this.item, number: this.number });
+    // console.log(this.number);
+    }else{
+      window.alert('这是第一首哦')
+    }
+    
   }
   updatePlay() {
     if (this.btnPlayName === "pause") {
-        this.btnPlayName = "play";
-        this.$store.commit('switchPlay','play')
-      } else {
-        this.btnPlayName = "pause";
-        this.$store.commit('switchPlay','pause')
-      }
+      this.btnPlayName = "play";
+      this.$store.commit("switchPlay", "play");
+    } else {
+      this.btnPlayName = "pause";
+      this.$store.commit("switchPlay", "pause");
+    }
   }
 }
 </script>
