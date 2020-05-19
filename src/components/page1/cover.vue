@@ -16,9 +16,12 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class Cover extends Vue {
   playPause: string = "pause";
+
   updatePlay() {
+    const auduio = new Audio()
     if (this.playPause === "pause") {
       this.playPause = "play";
+      audio.
     } else {
       this.playPause = "pause";
     }
