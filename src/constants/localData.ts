@@ -1,7 +1,7 @@
 
 export default [
-    { id:1,name: "经典", imgUrl: "classics",song:[{title:'当爱已成往事',artist:'张国荣',url:'当爱已成往事',imgUrl: "Leslie"},
-    {title:'相思',artist:'毛阿敏',url:'相思',imgUrl: "Leslie"},{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "Leslie"}
+    { id:1,name: "经典", imgUrl: "classics",song:[{title:'相思',artist:'毛阿敏',url:'相思',imgUrl: "Leslie"},{title:'当爱已成往事',artist:'张国荣',url:'当爱已成往事',imgUrl: "Leslie"},
+    {title:'1973',artist:'James Blunt',url:'1973',imgUrl: "Leslie"}
   ] },
     { id:2,name: "校园", imgUrl: "class",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "Leslie"}] },
     { id:3,name: "小清新", imgUrl: "pure",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "Leslie"}] },

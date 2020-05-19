@@ -3,8 +3,8 @@
     <figure id="themeImg"></figure>
     <div class="icons">
       <icons name="last" class="item" />
-      <icons :name="playPause" class="item" ref="btnPlay" @click="updatePlay" />
-      <icons name="next" class="item" />
+      <icons :name="btnPlay" class="item" id="btnPlay" @click="$emit('updatePlay',$event)" />
+      <icons name="next" class="item" @click="$emit('updateNext',$event)" />
       <icons name="heart" class="item" />
     </div>
   </div>
@@ -12,20 +12,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Cover extends Vue {
-  playPause: string = "pause";
-
-  updatePlay() {
-    const auduio = new Audio()
-    if (this.playPause === "pause") {
-      this.playPause = "play";
-      audio.
-    } else {
-      this.playPause = "pause";
-    }
-  }
+  @Prop(String)btnPlay?: string
 }
 </script>
 

@@ -2,7 +2,7 @@
   <section class="page-music">
     <Background id="bg" />
     <main class="layOut">
-      <Cover />
+      <Cover @updateNext="updateNext" @updatePlay="updatePlay" :btnPlay='btnPlayName' />
       <Detail />
     </main>
     <Footer @song="updateCover" />
@@ -21,8 +21,25 @@ import Footer from "@/components/page1/footer.vue";
   components: { Footer, Detail, Cover, Background }
 })
 export default class Page1 extends Vue {
-  updateCover(item: Picture) {
-    this.$store.commit("updateCover", item);
+item:Picture={id: 0,name: '',imgUrl: '',song: []}
+btnPlayName: string='play'
+
+  updateCover(item: Picture,number:number) {
+    this.$store.commit("updateCover", {item:item,number:0});
+    this.item = item
+    this.btnPlayName = 'pause'
+  }
+  updateNext(){
+    this.$store.commit("updateNext", this.item)
+  }
+  updatePlay() {
+    if (this.btnPlayName === "pause") {
+        this.btnPlayName = "play";
+        this.$store.commit('switchPlay','play')
+      } else {
+        this.btnPlayName = "pause";
+        this.$store.commit('switchPlay','pause')
+      }
   }
 }
 </script>

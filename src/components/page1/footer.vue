@@ -10,7 +10,6 @@
     </div>
   </footer>
 </template>
-s
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
@@ -53,7 +52,7 @@ export default class Footer extends Vue {
       }
     });
   }
-  getSong(item:Picture) {
+  getSong(item: Picture) {
     this.$emit("song", item);
   }
 }
