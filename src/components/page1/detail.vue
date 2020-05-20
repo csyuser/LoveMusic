@@ -1,7 +1,7 @@
 <template>
   <div class="details">
-    <span class="tag" id="tag">90后</span>
-    <h1 class="title" id="title">Love</h1>
+    <span class="tag">{{this.$store.state.tagName}}</span>
+    <h1 class="title">{{this.$store.state.title}}</h1>
     <ul class="icons">
       <li>
         <icons name="earphone" class="item"/> 3333
@@ -15,12 +15,12 @@
     </ul>
     <div class="are-bar">
       <div class="bar">
-        <div class="progressBar"></div>
+        <div class="progressBar" :style="{width:this.$store.state.currentBarWidth}"></div>
       </div>
       <div class="currentTime">{{this.$store.state.currentTime}}</div>
     </div>
-    <div class="author" id="author">作者作者</div>
-    <div id="lyric">歌词歌词歌词歌词歌词歌词歌词歌词</div>
+    <div class="author">{{this.$store.state.author}}</div>
+    <div class="lyric">歌词歌词歌词歌词歌词歌词歌词歌词</div>
   </div>
 </template>
 
@@ -77,7 +77,6 @@
 
         > .progressBar {
           position: absolute;
-          width: 10%;
           height: 0.8vh;
           border-radius: 0.2vh;
           background: #ffffff;
