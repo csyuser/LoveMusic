@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    audio: new Audio()
+    audio: new Audio(),
+    statusClock: 0,
+    currentTime:'0:00'
   },
   mutations: {
     // parseImg(state,path: string) {
@@ -15,7 +17,7 @@ const store = new Vuex.Store({
     //   // return require("../assets/images/" + path + ".jpg")
     //   return 111
     // },
-    updateCover(state, payload: {item: Picture,number:number}) {
+    updateCover(state, payload: { item: Picture, number: number }) {
       const themeImg = document.getElementById("themeImg");
       const bg = document.getElementById("bg");
       const tag = document.getElementById("tag");
@@ -33,8 +35,26 @@ const store = new Vuex.Store({
       author.innerHTML = payload.item.song[payload.number].artist;
       state.audio.src = require("../assets/music/" + payload.item.song[payload.number].url + ".mp3");
       state.audio.play();
+      store.commit('eventListener')
       // console.log('songImgUrl')
       // console.log(songImgUrl)
+    },
+    eventListener(state){
+      state.audio.addEventListener('play', () => {
+        clearInterval(state.statusClock)
+        const statusClock = setInterval(() => { store.commit('updateStatus') }, 1000)
+        state.statusClock = statusClock
+      })
+      state.audio.addEventListener('pause', () => {
+        clearInterval(state.statusClock)
+      })
+    },
+    updateStatus(state) {
+      const min = Math.floor(state.audio.currentTime / 60)
+      let second = Math.floor(state.audio.currentTime % 60) + ""
+      second = second.length === 2 ? second : '0' + second
+      const currentTime = min + ':' + second
+      state.currentTime = currentTime
     },
     switchPlay(state, status) {
       if (status === 'pause') {
@@ -46,9 +66,6 @@ const store = new Vuex.Store({
         state.audio.pause()
       }
     },
-    updateNext(state, payload:{item:Picture,number:number}) {
-      store.commit('updateCover', {item:payload.item,number:payload.number})
-    }
     // updatePlay(state) {
     //   if (state.btnPlay === 'pause') {
     //     state.btnPlay = 'play'

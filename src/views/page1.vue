@@ -29,6 +29,7 @@ export default class Page1 extends Vue {
   item: Picture = { id: 0, name: "", imgUrl: "", song: [] };
   btnPlayName: string = "play";
   number: number = 0;
+  audio = new Audio()
 
   updateCover(item: Picture) {
     this.number = 0;
@@ -40,9 +41,7 @@ export default class Page1 extends Vue {
     this.btnPlayName = "pause";
     if (this.item.song.length-1 > this.number) {
       this.number += 1;
-      this.$store.commit("updateNext", {item: this.item,number: this.number });
-      console.log(this.number);
-      console.log(this.item.song.length);
+      this.$store.commit("updateCover", {item: this.item,number: this.number });
     }else{
       window.alert('这是最后一首啦')
     }
@@ -51,8 +50,7 @@ export default class Page1 extends Vue {
     this.btnPlayName = "pause";
     if(this.number>0){
     this.number -= 1;
-    this.$store.commit("updateNext", { item: this.item, number: this.number });
-    // console.log(this.number);
+    this.$store.commit("updateCover", { item: this.item, number: this.number });
     }else{
       window.alert('这是第一首哦')
     }

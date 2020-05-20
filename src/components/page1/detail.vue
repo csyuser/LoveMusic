@@ -4,23 +4,20 @@
     <h1 class="title" id="title">Love</h1>
     <ul class="icons">
       <li>
-        <icons name="earphone" class="item"/>
-        3333
+        <icons name="earphone" class="item"/> 3333
       </li>
       <li>
-        <icons name="heart" class="item"/>
-        3333
+        <icons name="heart" class="item"/>3333
       </li>
       <li>
-        <icons name="like" class="item"/>
-        3333
+        <icons name="like" class="item"/>3333
       </li>
     </ul>
     <div class="are-bar">
       <div class="bar">
         <div class="progressBar"></div>
       </div>
-      <div class="currentTime">1:05</div>
+      <div class="currentTime">{{this.$store.state.currentTime}}</div>
     </div>
     <div class="author" id="author">作者作者</div>
     <div id="lyric">歌词歌词歌词歌词歌词歌词歌词歌词</div>
