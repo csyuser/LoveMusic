@@ -7,7 +7,7 @@ export default [
     { id:3,name: "小清新", imgUrl: "pure",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}] },
     { id:4,name: "旅游", imgUrl: "travel" ,song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}]},
     { id:5,name: "粤语", imgUrl: "Cantonese",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}] },
-    { id:6,name: "林俊杰", imgUrl: "JJ",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}] },
+    { id:6,name: "林俊杰", imgUrl: "JJ",song:[{title:'不为谁而作的歌',artist:'林俊杰',url:'不为谁而作的歌',imgUrl: "JJ"},{title:'学不会',artist:'林俊杰',url:'学不会',imgUrl: "JJ"},{title:'黑夜问白天',artist:'林俊杰',url:'黑夜问白天',imgUrl: "JJ"},{title:'茉莉雨',artist:'林俊杰',url:'茉莉雨',imgUrl: "JJ"}] },
     { id:7,name: "英文歌", imgUrl: "English",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}] },
     { id:8,name: "动漫", imgUrl: "Anime",song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}] },
     { id:9,name: "伤感", imgUrl: "sadness" ,song:[{title:'1973',artist:'James Blunt',url:'1973',imgUrl: "JamesBlunt"}]},
