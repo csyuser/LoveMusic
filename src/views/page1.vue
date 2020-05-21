@@ -38,34 +38,30 @@ export default class Page1 extends Vue {
   //   })
   // }
   updateCover(channel_id: string) {
-    this.$store.commit("updateCover", channel_id);
+    // const _this=this
+    // const coverPromise = new Promise(function(resolve,rejsct){
+    //   resolve(_this.$store.commit("updateCover", channel_id))
+    // })
+    // coverPromise.then(()=>{
+    // this.btnPlayName = 'pause'
+    // console.log('this.btnPlayName2')
+    // console.log(this.btnPlayName)
+    // })
+    this.$store.commit("updateCover", channel_id)
+    if(this.$store.state.btnPlayName==='pause'){
+      this.btnPlayName = 'pause'
+    }
     this.channel_id = channel_id;
-    this.btnPlayName = "pause";
+    console.log('this.btnPlayName')
+    console.log(this.btnPlayName)
   }
   updateNext() {
-    
-    this.btnPlayName = "pause";
-    if (this.item.song.length - 1 > this.number) {
-      this.number += 1;
-      this.$store.commit("updateCover", {
-        item: this.item,
-        number: this.number
-      });
-    } else {
-      window.alert("这是最后一首啦");
-    }
+    this.btnPlayName = 'pause'
+    this.$store.commit("updateCover", this.channel_id)
   }
   updateLast() {
-    this.btnPlayName = "pause";
-    if (this.number > 0) {
-      this.number -= 1;
-      this.$store.commit("updateCover", {
-        item: this.item,
-        number: this.number
-      });
-    } else {
-      window.alert("这是第一首哦");
-    }
+    this.btnPlayName = 'pause'
+    this.$store.commit("updateCover", this.channel_id)
   }
   updatePlay() {
     if (this.btnPlayName === "pause") {

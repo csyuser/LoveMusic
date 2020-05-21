@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     author:'James Blunt',
     currentBarWidth:'0%',
     currentTime:'0:00',
+    btnPlayName:'play',
     // songs:[{side: '',ssid: '',title: '',picture: '',artist: '',url: '',lrc: ''}]
   },
   mutations: {
@@ -23,7 +24,7 @@ const store = new Vuex.Store({
     //   // return require("../assets/images/" + path + ".jpg")
     //   return 111
     // },
-    updateCover(state, channel_id) {
+    updateCover(state, channel_id:string ) {
       const themeImg = document.getElementById("themeImg");
       const bg = document.getElementById("bg");
 
@@ -37,6 +38,8 @@ const store = new Vuex.Store({
       state.author = songs[0].artist;
       state.audio.src = songs[0].url;
       state.audio.play();
+      state.btnPlayName='pause'
+      console.log(state.btnPlayName)
       store.commit('eventListener')
     }).catch(error=>{window.alert(error)})
     },
