@@ -1,10 +1,8 @@
 <template>
   <ul>
-    <li v-for="item in channels" :key="item.name" ref="li"
-    @click="$emit('click',item)"
-    >
-      <div class="bgmImg" :style="{backgroundImage: 'url('+parseImg(item.imgUrl) +')'}"></div>
-      <h3>{{item.name}}</h3>
+    <li v-for="item in channels" :key="item.id" ref="li" @click="$emit('click',item)">
+      <div class="bgmImg" :style="{backgroundImage: 'url('+item.cover_small+')'}"></div>
+      <h3>{{item.channel_id}}</h3>
     </li>
   </ul>
 </template>
@@ -12,16 +10,23 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import localData from "@/constants/localData"
-
+import localData from "@/constants/localData";
+import Axios from "axios";
 
 @Component
 export default class Images extends Vue {
-  channels:Picture[]=localData
+  channels = []
+  created() {
+    Axios.get("http://api.jirengu.com/fm/v2/getChannels.php").then(response => {
+      // console.log(response)
+      console.log(response.data.channels);
+      this.channels = response.data.channels;
+    });
+  }
+
   public parseImg(path: string) {
     return require("../../assets/images/" + path + ".jpg");
   }
-  
 }
 </script>
 
