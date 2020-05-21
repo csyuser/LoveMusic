@@ -38,22 +38,10 @@ export default class Page1 extends Vue {
   //   })
   // }
   updateCover(channel_id: string) {
-    // const _this=this
-    // const coverPromise = new Promise(function(resolve,rejsct){
-    //   resolve(_this.$store.commit("updateCover", channel_id))
-    // })
-    // coverPromise.then(()=>{
-    // this.btnPlayName = 'pause'
-    // console.log('this.btnPlayName2')
-    // console.log(this.btnPlayName)
-    // })
     this.$store.commit("updateCover", channel_id)
-    if(this.$store.state.btnPlayName==='pause'){
-      this.btnPlayName = 'pause'
-    }
+    this.$store.commit("getLyric")
     this.channel_id = channel_id;
-    console.log('this.btnPlayName')
-    console.log(this.btnPlayName)
+    this.btnPlayName = 'pause'
   }
   updateNext() {
     this.btnPlayName = 'pause'

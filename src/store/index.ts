@@ -8,12 +8,13 @@ const store = new Vuex.Store({
   state: {
     audio: new Audio(),
     statusClock: 0,
-    tagName:'校园',
-    title:'1973',
-    author:'James Blunt',
-    currentBarWidth:'0%',
-    currentTime:'0:00',
-    btnPlayName:'play',
+    tagName: '校园',
+    title: '1973',
+    author: 'James Blunt',
+    currentBarWidth: '0%',
+    currentTime: '0:00',
+    songSid: '',
+    songSsid: ''
     // songs:[{side: '',ssid: '',title: '',picture: '',artist: '',url: '',lrc: ''}]
   },
   mutations: {
@@ -24,29 +25,30 @@ const store = new Vuex.Store({
     //   // return require("../assets/images/" + path + ".jpg")
     //   return 111
     // },
-    updateCover(state, channel_id:string ) {
+    updateCover(state, channel_id: string) {
       const themeImg = document.getElementById("themeImg");
       const bg = document.getElementById("bg");
 
-      Axios.get('http://api.jirengu.com/fm/v2/getSong.php',{params:channel_id}).then(response=>{
-      const songs = response.data.song
-      if (themeImg === null || bg === null ||songs[0]===undefined) return;
-      themeImg.style.backgroundImage = "url(" +songs[0].picture + ")";
-      bg.style.backgroundImage = "url(" +songs[0].picture + ")";
-      state.tagName = channel_id;
-      state.title = songs[0].title;
-      state.author = songs[0].artist;
-      state.audio.src = songs[0].url;
-      state.audio.play();
-      state.btnPlayName='pause'
-      console.log(state.btnPlayName)
-      store.commit('eventListener')
-    }).catch(error=>{window.alert(error)})
+      Axios.get('http://api.jirengu.com/fm/v2/getSong.php', { params: channel_id }).then(response => {
+        console.log(response)
+        const songs = response.data.song
+        if (themeImg === null || bg === null || songs[0] === undefined) return;
+        themeImg.style.backgroundImage = "url(" + songs[0].picture + ")";
+        bg.style.backgroundImage = "url(" + songs[0].picture + ")";
+        state.tagName = channel_id;
+        state.title = songs[0].title;
+        state.author = songs[0].artist;
+        state.audio.src = songs[0].url;
+        state.audio.play();
+        state.songSid = songs[0].sid
+        state.songSsid = songs[0].ssid
+        store.commit('eventListener')
+      }).catch(error => { window.alert(error) })
     },
-    eventListener(state){
+    eventListener(state) {
       state.audio.addEventListener('play', () => {
         clearInterval(state.statusClock)
-        state.currentBarWidth='0%'
+        state.currentBarWidth = '0%'
         const statusClock = setInterval(() => { store.commit('updateStatus') }, 1000)
         state.statusClock = statusClock
       })
@@ -59,7 +61,7 @@ const store = new Vuex.Store({
       let second = Math.floor(state.audio.currentTime % 60) + ""
       second = second.length === 2 ? second : '0' + second
       state.currentTime = min + ':' + second
-     state.currentBarWidth = (state.audio.currentTime/state.audio.duration)*100 + '%'
+      state.currentBarWidth = (state.audio.currentTime / state.audio.duration) * 100 + '%'
     },
     switchPlay(state, status) {
       if (status === 'pause') {
@@ -71,6 +73,12 @@ const store = new Vuex.Store({
         state.audio.pause()
       }
     },
+    getLyric(state) {
+      Axios.get('http://api.jirengu.com/fm/v2/getLyric.php', { params: { sid: state.songSid, ssid: state.songSsid } }).then(response => {
+        console.log('response')
+        console.log(response)
+      })
+    }
     // updatePlay(state) {
     //   if (state.btnPlay === 'pause') {
     //     state.btnPlay = 'play'
