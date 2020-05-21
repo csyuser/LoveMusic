@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in channels" :key="item.id" ref="li" @click="$emit('click',item)">
+    <li v-for="item in channels" :key="item.id" ref="li" @click="$emit('click',item.channel_id)">
       <div class="bgmImg" :style="{backgroundImage: 'url('+item.cover_small+')'}"></div>
       <h3>{{item.channel_id}}</h3>
     </li>
@@ -19,7 +19,6 @@ export default class Images extends Vue {
   created() {
     Axios.get("http://api.jirengu.com/fm/v2/getChannels.php").then(response => {
       // console.log(response)
-      console.log(response.data.channels);
       this.channels = response.data.channels;
     });
   }

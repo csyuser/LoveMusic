@@ -52,8 +52,8 @@ export default class Footer extends Vue {
       }
     });
   }
-  getSong(item: Picture) {
-    this.$emit("song", item);
+  getSong(channel_id:string) {
+    this.$emit("song", channel_id);
   }
 }
 </script>

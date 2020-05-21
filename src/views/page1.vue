@@ -21,40 +21,51 @@ import Background from "@/views/background.vue";
 import Cover from "@/components/page1/cover.vue";
 import Detail from "@/components/page1/detail.vue";
 import Footer from "@/components/page1/footer.vue";
+import Axios from 'axios'
 
 @Component({
   components: { Footer, Detail, Cover, Background }
 })
 export default class Page1 extends Vue {
-  item: Picture = { id: 0, name: "", imgUrl: "", song: [] };
+  channel_id: string = '';
   btnPlayName: string = "play";
   number: number = 0;
-  audio = new Audio()
+  audio = new Audio();
 
-  updateCover(item: Picture) {
-    this.number = 0;
-    this.$store.commit("updateCover", { item: item, number: this.number });
-    this.item = item;
+  // created() {
+  //   Axios.get('http://api.jirengu.com/fm/v2/getSong.php',{params:this.channel_id}).then(response=>{
+  //     console.log(response)
+  //   })
+  // }
+  updateCover(channel_id: string) {
+    this.$store.commit("updateCover", channel_id);
+    this.channel_id = channel_id;
     this.btnPlayName = "pause";
   }
   updateNext() {
+    
     this.btnPlayName = "pause";
-    if (this.item.song.length-1 > this.number) {
+    if (this.item.song.length - 1 > this.number) {
       this.number += 1;
-      this.$store.commit("updateCover", {item: this.item,number: this.number });
-    }else{
-      window.alert('这是最后一首啦')
+      this.$store.commit("updateCover", {
+        item: this.item,
+        number: this.number
+      });
+    } else {
+      window.alert("这是最后一首啦");
     }
   }
   updateLast() {
     this.btnPlayName = "pause";
-    if(this.number>0){
-    this.number -= 1;
-    this.$store.commit("updateCover", { item: this.item, number: this.number });
-    }else{
-      window.alert('这是第一首哦')
+    if (this.number > 0) {
+      this.number -= 1;
+      this.$store.commit("updateCover", {
+        item: this.item,
+        number: this.number
+      });
+    } else {
+      window.alert("这是第一首哦");
     }
-    
   }
   updatePlay() {
     if (this.btnPlayName === "pause") {

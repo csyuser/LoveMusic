@@ -5,8 +5,11 @@ type Picture = {
     song: Song[]
 }
 type Song = {
+    side: string
+    ssid: string
     title: string
+    picture: string
     artist: string
     url: string
-    imgUrl: string
+    lrc: string
 }

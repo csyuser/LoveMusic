@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,8 @@ const store = new Vuex.Store({
     title:'1973',
     author:'James Blunt',
     currentBarWidth:'0%',
-    currentTime:'0:00'
+    currentTime:'0:00',
+    // songs:[{side: '',ssid: '',title: '',picture: '',artist: '',url: '',lrc: ''}]
   },
   mutations: {
     // parseImg(state,path: string) {
@@ -21,23 +23,22 @@ const store = new Vuex.Store({
     //   // return require("../assets/images/" + path + ".jpg")
     //   return 111
     // },
-    updateCover(state, payload: { item: Picture, number: number }) {
+    updateCover(state, channel_id) {
       const themeImg = document.getElementById("themeImg");
       const bg = document.getElementById("bg");
-      // const songImgUrl = store.commit('parseImg',item.song[0].imgUrl)
-      const songImgUrl = require("../assets/images/" + payload.item.song[payload.number].imgUrl + ".jpg")
 
-      if (themeImg === null || bg === null) return;
-      themeImg.style.backgroundImage = "url(" + songImgUrl + ")";
-      bg.style.backgroundImage = "url(" + songImgUrl + ")";
-      state.tagName = payload.item.name;
-      state.title = payload.item.song[payload.number].title;
-      state.author = payload.item.song[payload.number].artist;
-      state.audio.src = require("../assets/music/" + payload.item.song[payload.number].url + ".mp3");
+      Axios.get('http://api.jirengu.com/fm/v2/getSong.php',{params:channel_id}).then(response=>{
+      const songs = response.data.song
+      if (themeImg === null || bg === null ||songs[0]===undefined) return;
+      themeImg.style.backgroundImage = "url(" +songs[0].picture + ")";
+      bg.style.backgroundImage = "url(" +songs[0].picture + ")";
+      state.tagName = channel_id;
+      state.title = songs[0].title;
+      state.author = songs[0].artist;
+      state.audio.src = songs[0].url;
       state.audio.play();
       store.commit('eventListener')
-      // console.log('songImgUrl')
-      // console.log(songImgUrl)
+    }).catch(error=>{window.alert(error)})
     },
     eventListener(state){
       state.audio.addEventListener('play', () => {
