@@ -14,7 +14,9 @@ const store = new Vuex.Store({
     currentBarWidth: '0%',
     currentTime: '0:00',
     songSid: '',
-    songSsid: ''
+    songSsid: '',
+    lyricObj: {},
+    lyric: ''
     // songs:[{side: '',ssid: '',title: '',picture: '',artist: '',url: '',lrc: ''}]
   },
   mutations: {
@@ -30,6 +32,7 @@ const store = new Vuex.Store({
       const bg = document.getElementById("bg");
 
       Axios.get('http://api.jirengu.com/fm/v2/getSong.php', { params: channel_id }).then(response => {
+        console.log('channel')
         console.log(response)
         const songs = response.data.song
         if (themeImg === null || bg === null || songs[0] === undefined) return;
@@ -43,13 +46,17 @@ const store = new Vuex.Store({
         state.songSid = songs[0].sid
         state.songSsid = songs[0].ssid
         store.commit('eventListener')
+        store.commit("getLyric")
       }).catch(error => { window.alert(error) })
     },
     eventListener(state) {
       state.audio.addEventListener('play', () => {
         clearInterval(state.statusClock)
         state.currentBarWidth = '0%'
-        const statusClock = setInterval(() => { store.commit('updateStatus') }, 1000)
+        const statusClock = setInterval(() => {
+          store.commit('updateStatus')
+
+        }, 1000)
         state.statusClock = statusClock
       })
       state.audio.addEventListener('pause', () => {
@@ -62,6 +69,10 @@ const store = new Vuex.Store({
       second = second.length === 2 ? second : '0' + second
       state.currentTime = min + ':' + second
       state.currentBarWidth = (state.audio.currentTime / state.audio.duration) * 100 + '%'
+      const line = state.lyricObj['0' + min + ':' + second]
+      if (line) {
+        state.lyric = line
+      }
     },
     switchPlay(state, status) {
       if (status === 'pause') {
@@ -75,22 +86,20 @@ const store = new Vuex.Store({
     },
     getLyric(state) {
       Axios.get('http://api.jirengu.com/fm/v2/getLyric.php', { params: { sid: state.songSid, ssid: state.songSsid } }).then(response => {
-        console.log('response')
-        console.log(response)
+        const lyric = response.data.lyric
+        lyric.split('\n').forEach((line: string) => {
+          const times = line.match(/\d{2}:\d{2}/g)
+          const content = line.replace(/\[.+?\]/g, '')
+          console.log('times');
+          console.log(times);
+          if (Array.isArray(times)) {
+            times.forEach((time) => {
+              state.lyricObj[time] = content;
+            })
+          }
+        })
       })
     }
-    // updatePlay(state) {
-    //   if (state.btnPlay === 'pause') {
-    //     state.btnPlay = 'play'
-    //     store.commit('switchPlay', 'play')
-    //   } else {
-    //     state.btnPlay = 'pause'
-    //     store.commit('switchPlay', 'pause')
-    //   }
-    //   console.log('state.btnPlay')
-    //   console.log(state.btnPlay)
-    // }
-
   },
   actions: {
   },

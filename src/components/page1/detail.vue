@@ -20,7 +20,7 @@
       <div class="currentTime">{{this.$store.state.currentTime}}</div>
     </div>
     <div class="author">{{this.$store.state.author}}</div>
-    <div class="lyric">歌词歌词歌词歌词歌词歌词歌词歌词</div>
+    <div class="lyric">{{this.$store.state.lyric}}</div>
   </div>
 </template>
 

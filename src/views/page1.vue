@@ -39,7 +39,6 @@ export default class Page1 extends Vue {
   // }
   updateCover(channel_id: string) {
     this.$store.commit("updateCover", channel_id)
-    this.$store.commit("getLyric")
     this.channel_id = channel_id;
     this.btnPlayName = 'pause'
   }
