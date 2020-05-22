@@ -13,3 +13,6 @@ type Song = {
     url: string
     lrc: string
 }
+type LyricObj = {
+    [key: string]: string
+}

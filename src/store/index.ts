@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     currentTime: '0:00',
     songSid: '',
     songSsid: '',
-    lyricObj: {},
+    lyricObj: {} as LyricObj,
     lyric: ''
     // songs:[{side: '',ssid: '',title: '',picture: '',artist: '',url: '',lrc: ''}]
   },
@@ -64,6 +64,7 @@ const store = new Vuex.Store({
       })
     },
     updateStatus(state) {
+      state.lyric = ''
       const min = Math.floor(state.audio.currentTime / 60)
       let second = Math.floor(state.audio.currentTime % 60) + ""
       second = second.length === 2 ? second : '0' + second
@@ -87,11 +88,11 @@ const store = new Vuex.Store({
     getLyric(state) {
       Axios.get('http://api.jirengu.com/fm/v2/getLyric.php', { params: { sid: state.songSid, ssid: state.songSsid } }).then(response => {
         const lyric = response.data.lyric
+      console.log('lyric');
+      console.log(lyric);
         lyric.split('\n').forEach((line: string) => {
           const times = line.match(/\d{2}:\d{2}/g)
           const content = line.replace(/\[.+?\]/g, '')
-          console.log('times');
-          console.log(times);
           if (Array.isArray(times)) {
             times.forEach((time) => {
               state.lyricObj[time] = content;

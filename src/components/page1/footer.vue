@@ -28,8 +28,8 @@ export default class Footer extends Vue {
     this.$nextTick(() => {
       let ele = document.getElementById("ul") as HTMLElement;
       let ulWidth = ele.offsetWidth;
-      let cliWidth = ((this.$refs.footer as any).offsetHeight / 0.24) * 0.22;
-      let coverWidth = (this.$refs.box as any).offsetWidth;
+      let cliWidth = ((this.$refs.footer as HTMLElement).offsetHeight / 0.24) * 0.22;
+      let coverWidth = (this.$refs.box as HTMLElement).offsetWidth;
       let liCount = Math.floor(coverWidth / cliWidth);
       let scrollWidth = cliWidth * liCount;
       let left = parseFloat(window.getComputedStyle(ele).marginLeft);
