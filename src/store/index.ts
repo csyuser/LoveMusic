@@ -17,23 +17,13 @@ const store = new Vuex.Store({
     songSsid: '',
     lyricObj: {} as LyricObj,
     lyric: ''
-    // songs:[{side: '',ssid: '',title: '',picture: '',artist: '',url: '',lrc: ''}]
   },
   mutations: {
-    // parseImg(state,path: string) {
-    //   console.log('执行了')
-    //   console.log(require("../assets/images/" + path + ".jpg"))
-    //   console.log(path)
-    //   // return require("../assets/images/" + path + ".jpg")
-    //   return 111
-    // },
     updateCover(state, channel_id: string) {
       const themeImg = document.getElementById("themeImg");
       const bg = document.getElementById("bg");
 
       Axios.get('http://api.jirengu.com/fm/v2/getSong.php', { params: channel_id }).then(response => {
-        console.log('channel')
-        console.log(response)
         const songs = response.data.song
         if (themeImg === null || bg === null || songs[0] === undefined) return;
         themeImg.style.backgroundImage = "url(" + songs[0].picture + ")";
@@ -88,8 +78,6 @@ const store = new Vuex.Store({
     getLyric(state) {
       Axios.get('http://api.jirengu.com/fm/v2/getLyric.php', { params: { sid: state.songSid, ssid: state.songSsid } }).then(response => {
         const lyric = response.data.lyric
-      console.log('lyric');
-      console.log(lyric);
         lyric.split('\n').forEach((line: string) => {
           const times = line.match(/\d{2}:\d{2}/g)
           const content = line.replace(/\[.+?\]/g, '')
