@@ -2,7 +2,7 @@
   <ul>
     <li v-for="item in channels" :key="item.id" ref="li" @click="$emit('click',item.channel_id)">
       <div class="bgmImg" :style="{backgroundImage: 'url('+item.cover_small+')'}"></div>
-      <h3>{{item.channel_id}}</h3>
+      <h3>{{item.name}}</h3>
     </li>
   </ul>
 </template>
@@ -10,7 +10,6 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import localData from "@/constants/localData";
 import Axios from "axios";
 
 @Component
@@ -57,3 +56,4 @@ ul {
   }
 }
 </style>
+

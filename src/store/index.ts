@@ -25,7 +25,11 @@ const store = new Vuex.Store({
 
       Axios.get('http://api.jirengu.com/fm/v2/getSong.php', { params: channel_id }).then(response => {
         const songs = response.data.song
-        if (themeImg === null || bg === null || songs[0] === undefined) return;
+        if (themeImg === null || bg === null || songs[0] === undefined) 
+        {
+          window.alert('暂无数据，请稍后')
+          return;
+        }
         themeImg.style.backgroundImage = "url(" + songs[0].picture + ")";
         bg.style.backgroundImage = "url(" + songs[0].picture + ")";
         state.tagName = channel_id;

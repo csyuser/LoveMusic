@@ -5,7 +5,7 @@
       <icons name="last" class="item" @click="$emit('updateLast',$event)"/>
       <icons :name="btnPlay" class="item" id="btnPlay" @click="$emit('updatePlay',$event)" />
       <icons name="next" class="item" @click="$emit('updateNext',$event)" />
-      <icons name="heart" class="item" />
+      <!-- <icons name="heart" class="item" /> -->
     </div>
   </div>
 </template>

@@ -27,18 +27,19 @@ import Axios from 'axios'
   components: { Footer, Detail, Cover, Background }
 })
 export default class Page1 extends Vue {
-  channel_id: string = '';
-  btnPlayName: string = "play";
-  number: number = 0;
-  audio = new Audio();
+  channel_id= '';
+  btnPlayName= "play";
+  number= 0;
 
   // created() {
   //   Axios.get('http://api.jirengu.com/fm/v2/getSong.php',{params:this.channel_id}).then(response=>{
   //     console.log(response)
   //   })
   // }
+  // eslint-disable-next-line @typescript-eslint/camelcase
   updateCover(channel_id: string) {
     this.$store.commit("updateCover", channel_id)
+    // eslint-disable-next-line @typescript-eslint/camelcase
     this.channel_id = channel_id;
     this.btnPlayName = 'pause'
   }

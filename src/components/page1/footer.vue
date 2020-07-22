@@ -13,26 +13,24 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import Axios from "axios";
 import Images from "@/components/footer/images.vue";
 @Component({
   components: { Images }
 })
 export default class Footer extends Vue {
-  leftWidth: number = 0;
-  rightWidth: number = 0;
-  isLeft: string = "true";
-  isRight: string = "false";
+  leftWidth = 0;
+  isLeft= "true";
+  isRight= "false";
 
   scroll(direction: string) {
     this.$nextTick(() => {
-      let ele = document.getElementById("ul") as HTMLElement;
-      let ulWidth = ele.offsetWidth;
-      let cliWidth = ((this.$refs.footer as HTMLElement).offsetHeight / 0.24) * 0.22;
-      let coverWidth = (this.$refs.box as HTMLElement).offsetWidth;
-      let liCount = Math.floor(coverWidth / cliWidth);
-      let scrollWidth = cliWidth * liCount;
-      let left = parseFloat(window.getComputedStyle(ele).marginLeft);
+      const ele = document.getElementById("ul") as HTMLElement;
+      const ulWidth = ele.offsetWidth;
+      const cliWidth = ((this.$refs.footer as HTMLElement).offsetHeight / 0.24) * 0.22;
+      const coverWidth = (this.$refs.box as HTMLElement).offsetWidth;
+      const liCount = Math.floor(coverWidth / cliWidth);
+      const scrollWidth = cliWidth * liCount;
+      const left = parseFloat(window.getComputedStyle(ele).marginLeft);
       if (direction === "right") {
         if (this.isLeft === "true") {
           this.leftWidth += -scrollWidth;
@@ -52,7 +50,8 @@ export default class Footer extends Vue {
       }
     });
   }
-  getSong(channel_id:string) {
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  getSong(channel_id: string) {
     this.$emit("song", channel_id);
   }
 }
